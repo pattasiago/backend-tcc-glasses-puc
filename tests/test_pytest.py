@@ -1,4 +1,4 @@
-from src.app import app
+from web.views import app
 
 
 # create a test for the /api route

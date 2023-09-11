@@ -1,0 +1,2 @@
+class EmployeeTableException(Exception):
+    pass
