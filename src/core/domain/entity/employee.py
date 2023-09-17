@@ -1,6 +1,7 @@
 from dataclasses import asdict, dataclass
 
-from core.domain.utils.CPF import CPF
+from core.shared.CPF import validate_cpf
+from core.shared.exceptions import InvalidCPF
 
 # from exceptions import EmployeeTableException
 
@@ -18,6 +19,10 @@ class Employee:
     # CEP: str
     # address: str
     # address_number: int
+
+    def __post_init__(self):
+        if not validate_cpf(self.cpf):
+            raise InvalidCPF("CPF Inválido")
 
     def to_dict(self):
         return asdict(self)

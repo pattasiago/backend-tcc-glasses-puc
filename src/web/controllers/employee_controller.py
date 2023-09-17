@@ -4,6 +4,7 @@ from core.application.service.employee import (
     GetEmployeeByIdService,
     GetEmployeeService,
 )
+from core.shared.exceptions import CPFException
 
 
 class EmployeeController:
@@ -19,4 +20,7 @@ class EmployeeController:
         return self.get_employee_by_id_svc.execute(id), 200
 
     def create_employee(self, body):
-        return self.create_employee_svc.execute(body), 200
+        try:
+            return self.create_employee_svc.execute(body), 201
+        except CPFException as cpfe:
+            return {"message": str(cpfe)}, 400

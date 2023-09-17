@@ -15,6 +15,10 @@ employee_model_creation = ApiModel(
     "EmployeeCreation",
     {
         "name": fields.String(required=True, description="employee name"),
-        "cpf": fields.String(required=True, description="employee CPF"),
+        "cpf": fields.String(
+            required=True,
+            description="employee CPF",
+            pattern=r"^\d{3}\.\d{3}\.\d{3}\-\d{2}$",
+        ),
     },
 )

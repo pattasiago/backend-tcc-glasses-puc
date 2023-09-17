@@ -12,9 +12,9 @@ class EmployeeORMCreator:
         class EmployeeORM(class_base, base_mixin):
             __tablename__ = "employees"
 
-            id = Column(Integer, primary_key=True)
-            name = Column(String)
-            cpf = Column(String)
+            id = Column(Integer, primary_key=True, autoincrement=True)
+            name = Column(String, nullable=False)
+            cpf = Column(String, unique=True, nullable=False)
 
             def to_entity(self):
                 return Employee(name=self.name, id=self.id, cpf=self.cpf)

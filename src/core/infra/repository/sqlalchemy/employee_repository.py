@@ -15,7 +15,19 @@ class SQLAlchemyEmployeeRepository(EmployeeRepositoryInterface):
 
     def get_employee_by_id(self, id: int) -> Employee:
         employee = self.database_conn.session.query(self.orm).get(id)
-        return employee.to_entity()
+        if employee:
+            return employee.to_entity()
+        else:
+            return None
+
+    def get_employee_by_cpf(self, cpf: str) -> Employee:
+        employee = (
+            self.database_conn.session.query(self.orm).filter(self.orm.cpf == cpf).one()
+        )
+        if employee:
+            return employee.to_entity()
+        else:
+            return None
 
     def create_employee(self, employee: dict) -> None:
         employee_orm = self.orm(**employee)
