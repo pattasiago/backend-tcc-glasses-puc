@@ -1,15 +1,7 @@
-import os
-import sys
 from logging.config import fileConfig
-from pathlib import Path
 
 from alembic import context
 from sqlalchemy import create_engine
-
-# Get the parent directory
-current_directory = os.path.dirname(os.path.abspath(__file__))
-parent_directory = os.path.dirname(current_directory)
-sys.path.append(parent_directory)
 
 from config import database_connection, db_uri
 
