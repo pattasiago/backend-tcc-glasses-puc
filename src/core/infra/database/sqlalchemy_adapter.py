@@ -17,11 +17,12 @@ class BaseMixin:
 
 
 class SQLAlchemyConnection(DatabaseConnection):
+    base = declarative_base()
+    base_mixin = BaseMixin
+
     def __init__(self, db_uri):
-        self.engine = create_engine(db_uri)
+        self.engine = create_engine(db_uri, pool_size=10, max_overflow=20)
         self.mapper_registry = registry()
-        self.base = declarative_base()
-        self.base_mixin = BaseMixin
         self.db_session = sessionmaker(
             autocommit=False, autoflush=False, bind=self.engine
         )
