@@ -18,7 +18,8 @@ employee_model_creation = ApiModel(
         "cpf": fields.String(
             required=True,
             description="employee CPF",
-            pattern=r"^\d{3}\.\d{3}\.\d{3}\-\d{2}$",
+            pattern=r"^\d{3}\d{3}\d{3}\d{2}$",
         ),
+        "gender_id": fields.Integer(required=True, description="employee gender"),
     },
 )

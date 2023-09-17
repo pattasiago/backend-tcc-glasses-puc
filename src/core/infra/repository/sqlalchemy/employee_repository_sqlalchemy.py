@@ -8,25 +8,25 @@ class SQLAlchemyEmployeeRepository(EmployeeRepositoryInterface):
     def __init__(self, sqlalchemy_conn: SQLAlchemyConnection):
         self.database_conn = sqlalchemy_conn
 
-    def get_employees(self) -> list[Employee]:
+    def get_employees(self) -> list[dict]:
         employees = self.database_conn.session.query(EmployeeTable).all()
-        return list(map(lambda x: x.to_entity(), employees))
+        return list(map(lambda x: x.to_dict(), employees))
 
     def get_employee_by_id(self, id: int) -> Employee | None:
         employee = self.database_conn.session.query(EmployeeTable).get(id)
         if employee:
-            return employee.to_entity()
+            return employee.to_dict()
         else:
             return None
 
-    def get_employee_by_cpf(self, cpf: str) -> Employee | None:
+    def get_employee_by_cpf(self, cpf: str) -> dict | None:
         employee = (
             self.database_conn.session.query(EmployeeTable)
             .filter(EmployeeTable.cpf == cpf)
-            .one()
+            .one_or_none()
         )
         if employee:
-            return employee.to_entity()
+            return employee.to_dict()
         else:
             return None
 

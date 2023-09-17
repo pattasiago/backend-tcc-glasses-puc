@@ -7,9 +7,6 @@ class GetEmployeeService:
 
     def execute(self, asdict=True):
         if asdict:
-            return [
-                employee.to_dict()
-                for employee in self.employee_repository.get_employees()
-            ]
+            return [employee for employee in self.employee_repository.get_employees()]
         else:
             return self.employee_repository.get_employees()

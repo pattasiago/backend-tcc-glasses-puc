@@ -12,7 +12,7 @@ def validate_cpf(cpf) -> bool:
     validacao2 = False
 
     # Verifica a estrutura do CPF (111.222.333-44)
-    if re.match(r"\d{3}\.\d{3}\.\d{3}-\d{2}", cpf):
+    if re.match(r"\d{3}\d{3}\d{3}\d{2}", cpf):
         formatacao = True
 
     if len(numeros) == 11:
