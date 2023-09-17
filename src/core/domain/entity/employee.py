@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
 from core.domain.utils.CPF import CPF
 
@@ -11,10 +11,13 @@ class Employee:
 
     id: int
     name: str
-    CPF: str
+    cpf: str
     # phone: str
     # email: str
     # gender: str
     # CEP: str
     # address: str
     # address_number: int
+
+    def to_dict(self):
+        return asdict(self)
