@@ -3,13 +3,10 @@ import logging
 from flask import Flask
 
 from config import database_connection
-from core.infra.database.init_database_tables import init_database_tables
 from web.views import api
 
 # configure root logger
 logging.basicConfig(level=logging.DEBUG)
-
-init_database_tables(database_connection)
 
 app = Flask(__name__)
 api.init_app(app)

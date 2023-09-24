@@ -13,17 +13,16 @@ class Employee:
     name: str
     cpf: str
     gender_id: int
+    phone: str
+    email: str
+    CEP: str
+    address: str
+    address_number: int
     gender: Optional[str] = None
-    # phone: str
-    # email: str
-    # gender: str
-    # CEP: str
-    # address: str
-    # address_number: int
 
     def __post_init__(self):
         if not validate_cpf(self.cpf):
-            raise InvalidCPF("CPF Inválido")
+            raise InvalidCPF("Invalid CPF")
 
     def to_dict(self):
         return asdict(self)

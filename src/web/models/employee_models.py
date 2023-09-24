@@ -11,6 +11,8 @@ employee_model = ApiModel(
     },
 )
 
+# create model with Employee entity parameters
+
 employee_model_creation = ApiModel(
     "EmployeeCreation",
     {
@@ -21,5 +23,12 @@ employee_model_creation = ApiModel(
             pattern=r"^\d{3}\d{3}\d{3}\d{2}$",
         ),
         "gender_id": fields.Integer(required=True, description="employee gender"),
+        "phone": fields.Integer(required=True, description="employee number"),
+        "email": fields.String(required=True, description="employee email"),
+        "CEP": fields.Integer(required=True, description="employee CEP"),
+        "address": fields.String(required=True, description="employee gender"),
+        "address_number": fields.Integer(
+            required=True, description="employee address number"
+        ),
     },
 )

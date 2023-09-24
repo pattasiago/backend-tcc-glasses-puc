@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from core.domain.entity.employee import Employee
+
 
 class EmployeeRepositoryInterface(ABC):
     @abstractmethod
@@ -11,5 +13,5 @@ class EmployeeRepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def create_employee(self, body):
+    def create_employee(self, body: Employee):
         pass

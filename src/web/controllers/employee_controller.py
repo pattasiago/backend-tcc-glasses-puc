@@ -4,7 +4,7 @@ from core.application.service.employee import (
     GetEmployeeByIdService,
     GetEmployeeService,
 )
-from core.shared.exceptions import CPFException
+from core.shared.exceptions import CPFException, EmployeeNotFound
 
 
 class EmployeeController:
@@ -17,7 +17,10 @@ class EmployeeController:
         return self.get_employees_svc.execute(), 200
 
     def get_employee_by_id(self, id):
-        return self.get_employee_by_id_svc.execute(id), 200
+        try:
+            return self.get_employee_by_id_svc.execute(id), 200
+        except EmployeeNotFound as enf:
+            return {"message": str(enf)}, 404
 
     def create_employee(self, body):
         try:

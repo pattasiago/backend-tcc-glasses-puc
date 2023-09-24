@@ -1,4 +1,5 @@
 from core.application.repository.employee_repository import EmployeeRepositoryInterface
+from core.shared.exceptions import EmployeeNotFound
 
 
 class GetEmployeeByIdService:
@@ -6,4 +7,8 @@ class GetEmployeeByIdService:
         self.employee_repository = employee_repository
 
     def execute(self, id):
-        return self.employee_repository.get_employee_by_id(id)
+        employee = self.employee_repository.get_employee_by_id(id)
+        if not employee:
+            raise EmployeeNotFound("Employee Not Found!")
+        else:
+            return employee

@@ -16,3 +16,8 @@ class CPFAlreadyExists(CPFException):
 class DatabaseInstanceError(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+
+class EmployeeNotFound(Exception):
+    def __init__(self, message):
+        super().__init__(message)

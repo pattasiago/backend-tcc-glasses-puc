@@ -33,10 +33,10 @@ class EmployeeTable(class_base, base_mixin):
 
     gender = relationship("GenderTable", back_populates="employees", lazy=True)
 
-    def __init__(self, name, cpf, gender_id, **kwargs):
-        self.name = name
-        self.gender_id = gender_id
-        self.cpf = cpf
+    def __init__(self, employee: Employee):
+        self.name = employee.name
+        self.gender_id = employee.gender_id
+        self.cpf = employee.cpf
 
     def to_entity(self):
         return Employee(

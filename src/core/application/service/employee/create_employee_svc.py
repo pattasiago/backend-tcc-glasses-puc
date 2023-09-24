@@ -13,4 +13,4 @@ class CreateEmployeeService:
         cpf_exists = self.employee_repository.get_employee_by_cpf(employee.cpf)
         if cpf_exists:
             raise CPFAlreadyExists("CPF Already Exists")
-        return self.employee_repository.create_employee(employee.to_dict())
+        return self.employee_repository.create_employee(employee)

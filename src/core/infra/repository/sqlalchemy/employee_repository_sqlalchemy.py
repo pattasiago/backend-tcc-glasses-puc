@@ -12,7 +12,7 @@ class SQLAlchemyEmployeeRepository(EmployeeRepositoryInterface):
         employees = self.database_conn.session.query(EmployeeTable).all()
         return list(map(lambda x: x.to_dict(), employees))
 
-    def get_employee_by_id(self, id: int) -> Employee | None:
+    def get_employee_by_id(self, id: int) -> dict | None:
         employee = self.database_conn.session.query(EmployeeTable).get(id)
         if employee:
             return employee.to_dict()
@@ -30,7 +30,7 @@ class SQLAlchemyEmployeeRepository(EmployeeRepositoryInterface):
         else:
             return None
 
-    def create_employee(self, employee: dict) -> None:
-        employee_table = EmployeeTable(**employee)
+    def create_employee(self, employee: Employee) -> None:
+        employee_table = EmployeeTable(employee)
         self.database_conn.session.add(employee_table)
         self.database_conn.session.commit()
