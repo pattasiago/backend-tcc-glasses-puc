@@ -5,9 +5,9 @@ WORKDIR /app
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc
 
-COPY src/ .
+COPY ./ .
 
 RUN pip install --upgrade pip \
-    pip install -r ./requirements.txt
+    pip install -r ./src/requirements.txt
 
-CMD ["python", "main.py"]
+CMD ["python", "./src/main.py"]

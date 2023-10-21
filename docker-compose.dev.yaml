@@ -1,0 +1,38 @@
+version: '3'
+
+networks:
+  glasses-network:
+
+services:
+  postgres_db:
+    image: postgres
+    restart: always
+    networks:
+      - glasses-network
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+
+  backend-glasses-dev:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    restart: always
+    networks:
+      - glasses-network
+    volumes:
+      - "./src:/app/src"
+    ports:
+      - "5151:5151"
+    container_name: backend-glasses-dev
+    command: "tail -f /dev/null"
+    depends_on:
+      - postgres_db
+    environment:
+      PYTHONUNBUFFERED: 1
+      DATABASE_URI: "postgresql://postgres:admin@postgres_db:5432/postgres"
+      APP_MODE: 'DEV'
+
+
+
+    

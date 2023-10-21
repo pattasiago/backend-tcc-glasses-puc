@@ -1,7 +1,6 @@
 import json
 import os
 
-import dotenv
 import pytest
 from mock import patch
 

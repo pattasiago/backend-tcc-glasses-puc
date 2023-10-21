@@ -19,10 +19,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.10
+    - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
-        python-version: "3.10"
+        python-version: "3.11"
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -31,18 +31,18 @@ jobs:
       run: |
         pytest
 
-    # - name: Docker Login
-    #   uses: docker/login-action@v2.0.0
-    #   with:
-    #     username: ${{secrets.DOCKER_USERNAME}}
-    #     password: ${{secrets.DOCKER_ACCESSTOKEN}}
+    - name: Docker Login
+      uses: docker/login-action@v2.0.0
+      with:
+        username: ${{secrets.DOCKER_USERNAME}}
+        password: ${{secrets.DOCKER_ACCESSTOKEN}}
     
-    # - name: Build and push Docker images
-    #   uses: docker/build-push-action@v3.1.1
-    #   with:
-    #     context: .
-    #     file: ./Dockerfile
-    #     push: true
-    #     tags: |
-    #       iagopattas/teste:${{github.sha}}
-    #       iagopattas/teste:latest
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v3.1.1
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          iagopattas/glasses-dashboard-backend:${{github.sha}}
+          iagopattas/glasses-dashboard-backend:latest

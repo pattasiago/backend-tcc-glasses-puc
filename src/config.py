@@ -14,9 +14,9 @@ database_connection = None
 employee_repository = None
 
 
-def create_app_config(app_mode="PROD"):
+def create_app_config(app_mode="DEV"):
     global db_uri, database_connection, employee_repository
-    if app_mode == "PROD":
+    if app_mode in ("DEV", "PROD"):
         db_uri = os.getenv("DATABASE_URI")
         database_connection = SQLAlchemyConnection(db_uri)
         init_database_tables(database_connection)
@@ -26,4 +26,4 @@ def create_app_config(app_mode="PROD"):
     employee_repository = EmployeeRepositoryFactory(database_connection)
 
 
-create_app_config(app_mode=os.getenv("APP_MODE", "PROD"))
+create_app_config(app_mode=os.getenv("APP_MODE", "DEV"))
