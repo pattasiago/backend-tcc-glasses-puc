@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  backend-glasses-prod:
+    image: iagopattas/glasses-dashboard-backend:latest
+    restart: always
+    ports:
+      - "5151:5151"
+    container_name: backend-glasses-prod
+    command: "gunicorn --bind 0.0.0.0:5151 main:app -w 1 --threads 16 --log-level debug"
+    environment:
+      PYTHONUNBUFFERED: 1
+      DATABASE_URI: <>
+      APP_MODE: 'PROD'
+
+
+
+    

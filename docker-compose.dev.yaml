@@ -25,7 +25,7 @@ services:
     ports:
       - "5151:5151"
     container_name: backend-glasses-dev
-    command: "tail -f /dev/null"
+    command: "python src/main.py"
     depends_on:
       - postgres_db
     environment:

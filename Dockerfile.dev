@@ -11,5 +11,9 @@ RUN pip install --upgrade pip \
     pip install -r ./src/requirements.txt
 
 RUN rm -rf ./src
+COPY ./src/migrations ./src/
+
+RUN chmod +x ./init.sh
+ENTRYPOINT ["./init.sh"]
 
 CMD ["python", "./src/main.py"]
