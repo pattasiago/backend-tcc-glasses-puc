@@ -26,4 +26,8 @@ def create_app_config(app_mode="DEV"):
     employee_repository = EmployeeRepositoryFactory(database_connection)
 
 
-create_app_config(app_mode=os.getenv("APP_MODE", "DEV"))
+if os.getenv("ALEMBIC") != "1":
+    create_app_config(app_mode=os.getenv("APP_MODE", "DEV"))
+else:
+    db_uri = os.getenv("DATABASE_URI")
+    database_connection = SQLAlchemyConnection(db_uri)

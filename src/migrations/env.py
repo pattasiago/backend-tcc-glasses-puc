@@ -1,8 +1,10 @@
+import os
 from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import create_engine
 
+os.environ["ALEMBIC"] = "1"
 from config import database_connection, db_uri
 
 # from sqlalchemy import engine_from_config, pool
