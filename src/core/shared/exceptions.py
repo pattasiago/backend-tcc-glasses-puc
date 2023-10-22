@@ -21,3 +21,8 @@ class DatabaseInstanceError(Exception):
 class EmployeeNotFound(Exception):
     def __init__(self, message):
         super().__init__(message)
+
+
+class EmployeeUpdateException(Exception):
+    def __init__(self, message):
+        super().__init__(message)

@@ -29,7 +29,7 @@ def test_get_api_employee_by_id(mock, app_client):
 
     mock.return_value = None
     response = app_client.get("/employee/15")
-    assert response.status_code == 404
+    assert response.status_code == 400
 
 
 @patch(
@@ -94,3 +94,60 @@ def test_create_employee(mock, app_client):
     )
     # # check the status code of the response
     assert response.status_code == 400
+
+
+@patch(
+    "core.infra.repository.fake_employee_repository.FakeEmployeeRepository.delete_employee_by_id"
+)
+def test_delete_api_employee_by_id(mock, app_client):
+    mock.return_value = {
+        "id": 15,
+        "name": "Paulo",
+        "cpf": "38000966093",
+        "gender": "Masculino",
+        "gender_id": 1,
+    }
+    response = app_client.delete(f"/employee/{mock.return_value['id']}")
+    assert json.loads(response.data)["id"] == mock.return_value["id"]
+
+    mock.return_value = None
+    response = app_client.delete("/employee/15")
+    assert response.status_code == 400
+
+
+@patch(
+    "core.infra.repository.fake_employee_repository.FakeEmployeeRepository.get_employee_by_cpf",
+)
+def test_update_employee(mock, app_client):
+    id = 15
+    body = {
+        "name": "string",
+        "cpf": "18539421038",
+        "gender_id": 2,
+        "phone": 33081592,
+        "email": "email@email.com",
+        "CEP": 40850000,
+        "address": "rua",
+        "address_number": 13,
+    }
+    mock.return_value = None
+    response = app_client.patch(
+        f"/employee/{id}", data=json.dumps(body), content_type="application/json"
+    )
+    # # check the status code of the response
+    assert response.status_code == 400
+    assert json.loads(response.data)["message"] == "Employee Not Found!"
+
+    mock.return_value = {
+        "id": 16,
+        "name": "Paulo",
+        "cpf": "18539421038",
+        "gender": "Masculino",
+        "gender_id": 1,
+    }
+    response = app_client.patch(
+        f"/employee/{id}", data=json.dumps(body), content_type="application/json"
+    )
+    # # check the status code of the response
+    assert response.status_code == 400
+    assert json.loads(response.data)["message"] == "User ID and CPF Mismatch"

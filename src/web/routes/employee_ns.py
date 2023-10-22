@@ -2,7 +2,7 @@ from flask_restx import Namespace, Resource
 
 from config import employee_repository
 from web.controllers.employee_controller import EmployeeController
-from web.models.employee_models import employee_model_creation
+from web.models.employee_models import employee_model_creation, employee_model_update
 
 employee_ns = Namespace("employee", description="Employee Related Operations")
 
@@ -32,4 +32,19 @@ class EmployeeById(Resource):
     def get(self, id):
         """Retrieves an employee by id."""
         employees = employee_controller.get_employee_by_id(id)
+        return employees
+
+    def delete(self, id):
+        """Delete an employee by id."""
+        employees = employee_controller.delete_employee_by_id(id)
+        return employees
+
+    @employee_ns.expect(
+        employee_ns.model(employee_model_update.name, employee_model_update.body),
+        validate=True,
+    )
+    def patch(self, id):
+        """Update an employee info"""
+        body = employee_ns.payload
+        employees = employee_controller.update_employee(id, body)
         return employees

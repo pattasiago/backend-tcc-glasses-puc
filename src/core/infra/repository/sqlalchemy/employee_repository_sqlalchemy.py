@@ -34,3 +34,23 @@ class SQLAlchemyEmployeeRepository(EmployeeRepositoryInterface):
         employee_table = EmployeeTable(employee)
         self.database_conn.session.add(employee_table)
         self.database_conn.session.commit()
+
+    def delete_employee_by_id(self, employee_id) -> bool:
+        employee = (
+            self.database_conn.session.query(EmployeeTable)
+            .filter(EmployeeTable.id == employee_id)
+            .one_or_none()
+        )
+        if employee:
+            self.database_conn.session.delete(employee)
+            self.database_conn.session.commit()
+            return True
+        else:
+            return False
+
+    def update_employee(self, id, employee_editable_fields: dict) -> None:
+        employee_id = id
+        self.database_conn.session.query(EmployeeTable).filter(
+            EmployeeTable.id == employee_id
+        ).update(employee_editable_fields)
+        self.database_conn.session.commit()

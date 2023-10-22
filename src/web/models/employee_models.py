@@ -22,13 +22,30 @@ employee_model_creation = ApiModel(
             description="employee CPF",
             pattern=r"^\d{3}\d{3}\d{3}\d{2}$",
         ),
-        "gender_id": fields.Integer(required=True, description="employee gender"),
+        "gender_id": fields.Integer(
+            required=True, description="employee gender", default=3
+        ),
         "phone": fields.Integer(required=True, description="employee number"),
         "email": fields.String(required=True, description="employee email"),
         "CEP": fields.Integer(required=True, description="employee CEP"),
         "address": fields.String(required=True, description="employee gender"),
         "address_number": fields.Integer(
             required=True, description="employee address number"
+        ),
+    },
+)
+
+employee_model_update = ApiModel(
+    "EmployeeUpdate",
+    {
+        "name": fields.String(required=True, description="employee name"),
+        "cpf": fields.String(
+            required=True,
+            description="employee CPF",
+            pattern=r"^\d{3}\d{3}\d{3}\d{2}$",
+        ),
+        "gender_id": fields.Integer(
+            required=True, description="employee gender", default=3
         ),
     },
 )

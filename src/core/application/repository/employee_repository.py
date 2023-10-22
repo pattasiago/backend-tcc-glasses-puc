@@ -15,3 +15,11 @@ class EmployeeRepositoryInterface(ABC):
     @abstractmethod
     def create_employee(self, body: Employee):
         pass
+
+    @abstractmethod
+    def delete_employee_by_id(self, id: int):
+        pass
+
+    @abstractmethod
+    def update_employee(self, employee: Employee) -> None:
+        pass

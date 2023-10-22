@@ -17,3 +17,9 @@ class FakeEmployeeRepository(EmployeeRepositoryInterface):
 
     def create_employee(self, employee: Employee) -> None:
         pass
+
+    def delete_employee_by_id(self, id: int) -> dict | None:
+        pass
+
+    def update_employee(self, id, employee_editable_fields: dict) -> None:
+        pass
