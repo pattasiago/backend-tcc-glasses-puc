@@ -7,7 +7,7 @@ services:
     ports:
       - "5151:5151"
     container_name: backend-glasses-prod
-    command: "gunicorn --bind 0.0.0.0:5151 main:app -w 1 --threads 16 --log-level debug"
+    command: "gunicorn --bind 0.0.0.0:5151 main:app -w 1 --threads 16 --chdir /app/src --log-level debug"
     environment:
       PYTHONUNBUFFERED: 1
       DATABASE_URI: <>
